@@ -7,4 +7,7 @@
   4)Run "CopiaWork.xcworkspace"<br/>
   5)Build and Run.
 
+![Screenshot](/Screenshot1.PNG)
+![Screenshot](/Screenshot2.PNG)
+![Screenshot](/Screenshot3.PNG)
 
