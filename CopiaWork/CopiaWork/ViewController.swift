@@ -17,7 +17,8 @@ class ViewController: UIViewController,GMSMapViewDelegate {
     var timer: Timer! = nil
     var marker = GMSMarker()
     var counter: NSInteger!
-    
+    var initialPoint = CLLocationCoordinate2D()
+    var newCoordinate = CLLocationCoordinate2D()
     var mapCoords : [mapCoord] { //front end for coords model object
         get {
             return self.coordList.coordList
@@ -35,6 +36,7 @@ class ViewController: UIViewController,GMSMapViewDelegate {
         view = mapView
         counter = 0
         
+        initialPoint = CLLocationCoordinate2DMake(mapCoords[counter].coordinate.latitude, mapCoords[counter].coordinate.longitude)
         /*
         * Timer to call timedMovement every 0.5s.
         */
@@ -47,7 +49,7 @@ class ViewController: UIViewController,GMSMapViewDelegate {
     func timedMovement(){
         if(counter<mapCoords.count-1)
         {
-            var initialPoint = CLLocationCoordinate2DMake(mapCoords[counter].coordinate.latitude, mapCoords[counter].coordinate.longitude)
+
             marker.map = mapView
             marker.appearAnimation = .pop
             
@@ -55,13 +57,14 @@ class ViewController: UIViewController,GMSMapViewDelegate {
             CATransaction.setAnimationDuration(0.5)
             
             marker.position = initialPoint
-            let newCoordinate = self.mapCoords[counter].coordinate
+            newCoordinate = self.mapCoords[counter+1].coordinate
             self.moveMarker(self.marker, newCoordinate)
             initialPoint = newCoordinate
             counter = counter + 1
             
             CATransaction.commit()
-        }else{
+        }
+        else{
             timer.invalidate()
         }
     }
