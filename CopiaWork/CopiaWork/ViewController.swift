@@ -61,6 +61,8 @@ class ViewController: UIViewController,GMSMapViewDelegate {
             counter = counter + 1
             
             CATransaction.commit()
+        }else{
+            timer.invalidate()
         }
     }
     
